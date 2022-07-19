@@ -1,4 +1,4 @@
-package demo.filters;
+package com.example.demo.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-        if (session == null && !(uri.endsWith("demo/saveServlet") || uri.endsWith("demo/loginServlet") || uri.endsWith("demo/viewServlet"))) {
+        if (session == null && !(uri.endsWith("liba/saveServlet") || uri.endsWith("liba/loginServlet") || uri.endsWith("liba/viewServlet")||uri.endsWith("liba/viewByIDServlet")||uri.endsWith("liba/viewByAuthorServlet"))) {
             this.context.log("<<< Unauthorized access request");
             PrintWriter out = res.getWriter();
             out.println("No access!!!");

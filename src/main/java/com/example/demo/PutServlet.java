@@ -1,4 +1,4 @@
-package demo;
+package com.example.demo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,36 +8,33 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/saveServlet")
-public class SaveServlet extends HttpServlet {
+@WebServlet("/putServlet")
+public class PutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
+        String sid = request.getParameter("id");
+        int id = Integer.parseInt(sid);
 
         String name = request.getParameter("name");
         String author = request.getParameter("author");
-        String country = request.getParameter("country");
-
+        String country=request.getParameter("country");
         Book myBook = new Book();
-
+        myBook.setId(id);
         myBook.setName(name);
         myBook.setAuthor(author);
         myBook.setCountry(country);
 
-
-
-        int status = BookRepository.save(myBook);
-
+        int status = BookRepository.update(myBook);
 
         if (status > 0) {
-            out.print("Record saved successfully!");
+            response.sendRedirect("viewServlet");
         } else {
-            out.println("Sorry! unable to save record");
+            out.println("Sorry! unable to update record");
         }
         out.close();
     }

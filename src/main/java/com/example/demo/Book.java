@@ -1,4 +1,4 @@
-package demo;
+package com.example.demo;
 
 public class Book {
 
@@ -43,7 +43,7 @@ public class Book {
 
         @Override
         public String toString() {
-            return "Employee{" +
+            return "Book{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     ", country='" + country + '\'' +
