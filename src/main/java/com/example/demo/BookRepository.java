@@ -32,10 +32,11 @@ public class BookRepository {
         try {
             Connection connection = BookRepository.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement("insert into books(name,author,country) values (?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("insert into books(name,author,country,date) values (?,?,?,?)");
             ps.setString(1, myBook.getName());
             ps.setString(2, myBook.getAuthor());
             ps.setString(3, myBook.getCountry());
+            ps.setDate(4, (Date) myBook.getDate());
 
             status = ps.executeUpdate();
             connection.close();
@@ -52,11 +53,12 @@ public class BookRepository {
 
         try {
             Connection connection = BookRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("update books set name=?,author=?,country=? where id=?");
+            PreparedStatement ps = connection.prepareStatement("update books set name=?,author=?,country=?,date=? where id=?");
             ps.setString(1, myBook.getName());
             ps.setString(2, myBook.getAuthor());
             ps.setString(3, myBook.getCountry());
             ps.setInt(4, myBook.getId());
+            ps.setDate(5, (Date) myBook.getDate());
 
             status = ps.executeUpdate();
             connection.close();
@@ -99,6 +101,7 @@ public class BookRepository {
                 myBook.setName(rs.getString(2));
                 myBook.setCountry(rs.getString(3));
                 myBook.setAuthor(rs.getString(4));
+                myBook.setDate(rs.getDate(5));
             }
             connection.close();
 
@@ -126,6 +129,7 @@ public class BookRepository {
                 myBook.setName(rs.getString(2));
                 myBook.setCountry(rs.getString(3));
                 myBook.setAuthor(rs.getString(4));
+                myBook.setDate(rs.getDate(5));
                 listBooks.add(myBook);
 
             }
@@ -155,6 +159,7 @@ public class BookRepository {
                 myBook.setName(rs.getString(2));
                 myBook.setCountry(rs.getString(3));
                 myBook.setAuthor(rs.getString(4));
+                myBook.setDate(rs.getDate(5));
 
                 if (myBook.getAuthor().equals(author)) {
                     listBooks.add(myBook);

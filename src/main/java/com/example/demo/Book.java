@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Date;
+
 public class Book {
 
 
@@ -8,6 +10,8 @@ public class Book {
         private String country;
 
         private String author;
+
+        private Date date;
 
         public int getId() {
             return id;
@@ -50,6 +54,14 @@ public class Book {
                     ", author='" + author + '\'' +
                     '}';
         }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
 
 
