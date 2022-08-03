@@ -1,4 +1,6 @@
-package com.example.demo;
+package com.example.demo.servlets;
+
+import com.example.demo.BookRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

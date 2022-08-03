@@ -1,4 +1,7 @@
-package com.example.demo;
+package com.example.demo.servlets;
+
+import com.example.demo.Book;
+import com.example.demo.BookRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,13 +25,16 @@ public class SaveServlet extends HttpServlet {
         String name = request.getParameter("name");
         String author = request.getParameter("author");
         String country = request.getParameter("country");
+        int year= Integer.parseInt(request.getParameter("year"));
+        int amount=Integer.parseInt(request.getParameter("amount"));
 
         Book myBook = new Book();
 
         myBook.setName(name);
         myBook.setAuthor(author);
         myBook.setCountry(country);
-
+        myBook.setAmount(amount);
+        myBook.setAuthor(author);
 
         out.println(myBook);
         int status = BookRepository.save(myBook);

@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 public class BookRepository {
 
 
@@ -17,12 +19,12 @@ public class BookRepository {
         try {
             connection = DriverManager.getConnection(url, user, password);
             if (connection != null) {
-                System.out.println("Connected to the PostgreSQL server successfully.");
+                out.println("Connected to the PostgreSQL server successfully.");
             } else {
-                System.out.println("Failed to make connection!");
+                out.println("Failed to make connection!");
             }
         } catch (SQLException sqlException) {
-            System.out.println(sqlException);
+            out.println(sqlException);
         }
         return connection;
     }
@@ -32,11 +34,11 @@ public class BookRepository {
         try {
             Connection connection = BookRepository.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement("insert into books(name,author,country,date) values (?,?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("insert into books(name,author,country,amount,year) values (?,?,?,?,?)");
             ps.setString(1, myBook.getName());
             ps.setString(2, myBook.getAuthor());
             ps.setString(3, myBook.getCountry());
-            ps.setDate(4, (Date) myBook.getDate());
+            ps.setInt(4,myBook.getAmount());
 
             status = ps.executeUpdate();
             connection.close();
@@ -53,12 +55,12 @@ public class BookRepository {
 
         try {
             Connection connection = BookRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("update books set name=?,author=?,country=?,date=? where id=?");
+            PreparedStatement ps = connection.prepareStatement("update books set name=?,author=?,country=? where id=?");
             ps.setString(1, myBook.getName());
             ps.setString(2, myBook.getAuthor());
             ps.setString(3, myBook.getCountry());
             ps.setInt(4, myBook.getId());
-            ps.setDate(5, (Date) myBook.getDate());
+
 
             status = ps.executeUpdate();
             connection.close();
@@ -89,20 +91,16 @@ public class BookRepository {
 
     public static Book getBookById(int id) {
 
-        Book myBook = new Book();
+        Book myBook=null;
 
         try {
             Connection connection = BookRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("select * from books where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                myBook.setId(rs.getInt(1));
-                myBook.setName(rs.getString(2));
-                myBook.setCountry(rs.getString(3));
-                myBook.setAuthor(rs.getString(4));
-                myBook.setDate(rs.getDate(5));
-            }
+            myBook = createBook(rs);
+
+
             connection.close();
 
         } catch (SQLException exception) {
@@ -117,22 +115,17 @@ public class BookRepository {
 
         try {
             Connection connection = BookRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from books");
+            PreparedStatement ps = connection.prepareStatement("select * from books ");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
 
 
-                Book myBook = new Book();
+                Book myBook=createBook(rs);
 
-                myBook.setId(rs.getInt(1));
-                myBook.setName(rs.getString(2));
-                myBook.setCountry(rs.getString(3));
-                myBook.setAuthor(rs.getString(4));
-                myBook.setDate(rs.getDate(5));
                 listBooks.add(myBook);
-
             }
+
             connection.close();
 
         } catch (SQLException e) {
@@ -159,7 +152,8 @@ public class BookRepository {
                 myBook.setName(rs.getString(2));
                 myBook.setCountry(rs.getString(3));
                 myBook.setAuthor(rs.getString(4));
-                myBook.setDate(rs.getDate(5));
+                myBook.setAmount(rs.getInt(5));
+                myBook.setYear(rs.getInt(6));
 
                 if (myBook.getAuthor().equals(author)) {
                     listBooks.add(myBook);
@@ -174,6 +168,44 @@ public class BookRepository {
 
 
     }
+    public static List<Book> getBooksByName(String name) {
 
+        List<Book> listBooks = new ArrayList<>();
+
+        try {
+            Connection connection = BookRepository.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from books");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+
+                Book myBook = createBook(rs);
+
+                if (myBook.getAuthor().equals(name)) {
+                    listBooks.add(myBook);
+                }
+            }
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listBooks;
+
+
+    }
+    public static Book createBook(ResultSet rs) throws SQLException {
+        Book myBook = new Book();
+
+        myBook.setId(rs.getInt(1));
+        myBook.setName(rs.getString(2));
+        myBook.setCountry(rs.getString(3));
+        myBook.setAuthor(rs.getString(4));
+        myBook.setAmount(rs.getInt(5));
+        myBook.setYear(rs.getInt(6));
+
+        return myBook;
+    }
 
 }

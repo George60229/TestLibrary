@@ -1,4 +1,7 @@
-package com.example.demo;
+package com.example.demo.servlets;
+
+import com.example.demo.Book;
+import com.example.demo.BookRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +21,7 @@ public class ViewServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         List<Book> list = BookRepository.getAllBooks();
-
+        out.println(list);
         for (Book myBook : list) {
             out.print(myBook);
         }

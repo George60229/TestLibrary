@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.Date;
-
 public class Book {
 
 
@@ -11,7 +9,9 @@ public class Book {
 
         private String author;
 
-        private Date date;
+        private int year;
+        private int amount=1;
+        private boolean isDeleted=false;
 
         public int getId() {
             return id;
@@ -52,15 +52,33 @@ public class Book {
                     ", name='" + name + '\'' +
                     ", country='" + country + '\'' +
                     ", author='" + author + '\'' +
+                    ", amount='" + amount + '\'' +
+                    ", year='" + year + '\'' +
                     '}';
         }
 
-    public Date getDate() {
-        return date;
+    public int getYear() {
+        return year;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }
 
