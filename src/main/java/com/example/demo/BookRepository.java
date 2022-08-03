@@ -133,6 +133,104 @@ public class BookRepository {
         }
         return listBooks;
     }
+    public static List<Book> getAllBooksOrderByYear() {
+
+        List<Book> listBooks = new ArrayList<>();
+
+        try {
+            Connection connection = BookRepository.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from books order by year");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+
+                Book myBook=createBook(rs);
+
+                listBooks.add(myBook);
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listBooks;
+    }
+    public static List<Book> getAllBooksOrderByName() {
+
+        List<Book> listBooks = new ArrayList<>();
+
+        try {
+            Connection connection = BookRepository.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from books order by name");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+
+                Book myBook=createBook(rs);
+
+                listBooks.add(myBook);
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listBooks;
+    }
+    public static List<Book> getAllBooksOrderByCountry() {
+
+        List<Book> listBooks = new ArrayList<>();
+
+        try {
+            Connection connection = BookRepository.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from books order by country");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+
+                Book myBook=createBook(rs);
+
+                listBooks.add(myBook);
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listBooks;
+    }
+    public static List<Book> getAllBooksOrderByAuthor() {
+
+        List<Book> listBooks = new ArrayList<>();
+
+        try {
+            Connection connection = BookRepository.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from books order by author");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+
+                Book myBook=createBook(rs);
+
+                listBooks.add(myBook);
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listBooks;
+    }
+
+
 
     public static List<Book> getBooksByAuthor(String author) {
 

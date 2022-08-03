@@ -47,14 +47,15 @@ public class Book {
 
         @Override
         public String toString() {
-            return "Book{" +
+            return System.lineSeparator()+"Book{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     ", country='" + country + '\'' +
                     ", author='" + author + '\'' +
                     ", amount='" + amount + '\'' +
                     ", year='" + year + '\'' +
-                    '}';
+                    "}";
+            //fix it why 2????
         }
 
     public int getYear() {
