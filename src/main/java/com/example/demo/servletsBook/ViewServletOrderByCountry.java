@@ -1,4 +1,4 @@
-package com.example.demo.servlets;
+package com.example.demo.servletsBook;
 
 import com.example.demo.Book;
 import com.example.demo.BookRepository;
@@ -9,20 +9,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
-@WebServlet("/viewByIDServlet")
-public class ViewByIDServlet extends HttpServlet {
+@WebServlet("/viewServletOrderByCountry")
+
+public class ViewServletOrderByCountry extends HttpServlet {
+
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String sid = request.getParameter("id");
-        int id = Integer.parseInt(sid);
+        List<Book> list = BookRepository.getAllBooksOrderByCountry();
 
-        Book myBook = BookRepository.getBookById(id);
-
-        out.print(myBook);
+        for (Book myBook : list) {
+            out.print(myBook+System.lineSeparator());
+        }
         out.close();
     }
 }
+

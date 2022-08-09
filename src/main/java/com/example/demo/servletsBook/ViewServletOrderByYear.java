@@ -1,9 +1,8 @@
-package com.example.demo.servlets;
+package com.example.demo.servletsBook;
 
 import com.example.demo.Book;
 import com.example.demo.BookRepository;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +22,8 @@ public class ViewServletOrderByYear extends HttpServlet{
             PrintWriter out = response.getWriter();
 
             List<Book> list = BookRepository.getAllBooksOrderByYear();
-            out.println(list);
             for (Book myBook : list) {
-                out.print(myBook);
+                out.print(myBook+System.lineSeparator());
             }
             out.close();
         }

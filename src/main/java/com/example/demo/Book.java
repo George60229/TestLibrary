@@ -47,7 +47,7 @@ public class Book {
 
         @Override
         public String toString() {
-            return System.lineSeparator()+"Book{" +
+            return "Book{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     ", country='" + country + '\'' +

@@ -1,4 +1,4 @@
-package com.example.demo.servlets;
+package com.example.demo.servletsBook;
 
 import com.example.demo.Book;
 import com.example.demo.BookRepository;
@@ -23,9 +23,9 @@ public class ViewServletOrderByAuthor extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         List<Book> list = BookRepository.getAllBooksOrderByAuthor();
-        out.println(list);
+
         for (Book myBook : list) {
-            out.print(myBook);
+            out.print(myBook+System.lineSeparator());
         }
         out.close();
     }

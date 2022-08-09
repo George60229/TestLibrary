@@ -1,4 +1,4 @@
-package com.example.demo.servlets;
+package com.example.demo.servletsBook;
 
 import com.example.demo.Book;
 import com.example.demo.BookRepository;

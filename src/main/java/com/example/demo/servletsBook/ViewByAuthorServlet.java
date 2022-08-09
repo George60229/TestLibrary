@@ -1,4 +1,4 @@
-package com.example.demo.servlets;
+package com.example.demo.servletsBook;
 
 import com.example.demo.Book;
 import com.example.demo.BookRepository;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 
