@@ -32,9 +32,16 @@ public class UserRepository {
     public static int save(User myUser) {
         int status = 0;
         try {
-            Connection connection = UserRepository.getConnection();
 
+
+
+
+
+            Connection connection = UserRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("insert into users(login,password,role) values (?,?,?)");
+
+
+
             ps.setString(1, myUser.getLogin());
             ps.setString(2, myUser.getPassword());
             ps.setString(3, myUser.getRole());

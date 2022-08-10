@@ -27,14 +27,21 @@ public class SaveServlet extends HttpServlet {
         String country = request.getParameter("country");
         int year= Integer.parseInt(request.getParameter("year"));
         int amount=Integer.parseInt(request.getParameter("amount"));
-
+        if (amount<0){
+            response.sendError(404, "Wrong role for user!!!");
+            return;
+        }
+        if (year < 2022){
+            response.sendError(404, "Wrong role for user!!!");
+            return;
+        }
         Book myBook = new Book();
 
         myBook.setName(name);
         myBook.setAuthor(author);
         myBook.setCountry(country);
         myBook.setAmount(amount);
-        myBook.setAuthor(author);
+        myBook.setYear(year);
 
         out.println(myBook);
         int status = BookRepository.save(myBook);

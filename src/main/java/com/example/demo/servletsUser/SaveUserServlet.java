@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 @WebServlet("/saveUserServlet")
 public class SaveUserServlet extends HttpServlet {
@@ -20,9 +22,23 @@ public class SaveUserServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 
+
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
+
+        if(!role.equals("Admin")&&!role.equals("Reader")&&!role.equals("Librarian")){
+
+            response.sendError(404, "Wrong role for user!!!");
+            return;
+        }
+        if(password.length()<5){
+            response.sendError(404, "This password is weak!!!");
+            return;
+        }
+        // todo create request directly to db
+
 
 
         User myUser= new User();

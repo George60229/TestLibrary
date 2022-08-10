@@ -16,6 +16,10 @@ public class DeleteServlet extends HttpServlet {
 
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
+        if(id<0){
+            response.sendError(404, "Wrong id !!!");
+            return;
+        }
         BookRepository.delete(id);
         response.sendRedirect("viewServlet");
     }
