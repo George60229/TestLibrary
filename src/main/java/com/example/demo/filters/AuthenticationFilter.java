@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-        if (session == null && !(uri.endsWith("liba/saveServlet") || uri.endsWith("liba/loginServlet") || uri.endsWith("liba/viewServlet")||uri.endsWith("liba/viewByIDServlet")||uri.endsWith("liba/viewByAuthorServlet")||uri.endsWith("liba/viewServletOrderByYear")||uri.endsWith("liba/viewServletOrderByCountry")||uri.endsWith("liba/viewServletOrderByName")||uri.endsWith("liba/viewServletOrderByAuthor")||uri.endsWith("liba/saveUserServlet"))) {
+        if (session == null && !(uri.endsWith("liba/saveServlet") || uri.endsWith("liba/loginServlet") || uri.endsWith("liba/viewServlet")||uri.endsWith("liba/viewByIDServlet")||uri.endsWith("liba/viewByAuthorServlet")||uri.endsWith("liba/viewServletOrderByYear")||uri.endsWith("liba/viewServletOrderByCountry")||uri.endsWith("liba/viewServletOrderByName")||uri.endsWith("liba/viewServletOrderByAuthor")||uri.endsWith("liba/saveUserServlet")||uri.endsWith("liba/viewUserServlet")||uri.endsWith("liba/deleteUserServlet")||uri.endsWith("liba/blockUserServlet")||uri.endsWith("liba/putServlet"))) {
             this.context.log("<<< Unauthorized access request");
             PrintWriter out = res.getWriter();
             out.println("No access!!!");

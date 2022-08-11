@@ -6,6 +6,8 @@ public class User {
     private String password;
     private String role;
 
+    private boolean isblocked=false;
+
 
     public int getId() {
         return id;
@@ -37,6 +39,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean getIsBlocked() {
+        return isblocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isblocked = blocked;
     }
 
     @Override
